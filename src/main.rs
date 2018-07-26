@@ -1,6 +1,7 @@
 extern crate iron;
 extern crate bodyparser;
 extern crate router;
+extern crate chrono;
 
 use iron::status;
 use iron::prelude::*;
@@ -8,15 +9,18 @@ use router::{Router};
 use std::io::prelude::*;
 use std::io;
 use std::fs::OpenOptions;
+use std::path::Path;
+use chrono::Local;
 
 fn persistence_log(body: &[u8]) -> io::Result<()> {
-    let filename = "file.log";
+    let date = Local::now().format("%Y-%m-%d");
+    let file_path = "/data/logServer/".to_string() + &(date.to_string() + "-kong.log");
     let file = OpenOptions::new()
                 .read(true)
                 .write(true)
                 .create(true)
                 .append(true)
-                .open(filename);
+                .open(Path::new(&file_path));
 
     match file {
         Ok(mut stream) => {
@@ -41,9 +45,9 @@ fn log_body(req: &mut Request) -> IronResult<Response> {
     Ok(Response::with(status::Ok))
 }
 
-fn main() {
+fn main() {  
     let mut router = Router::new();
     router.post("/log", log_body, "log");
-    println!("Listening on port 10080...");
-    Iron::new(router).http("0.0.0.0:10080").unwrap();   
+    println!("Listening on port 3000...");
+    Iron::new(router).http("0.0.0.0:3000").unwrap();   
 }
