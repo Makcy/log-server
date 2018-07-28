@@ -1,5 +1,5 @@
 ## Usage
-**1、mkdir -p /data/logServer**
+**1、mkdir -p /data/logServer**
 
 **2、cargo run**
 
