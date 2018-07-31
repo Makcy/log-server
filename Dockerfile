@@ -16,4 +16,6 @@ RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.ustc.edu.cn/g' /etc/apk/repositorie
 
 EXPOSE 3000
 
+ENTRYPOINT ["./log-server"]
+
 
