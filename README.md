@@ -3,7 +3,7 @@
 
 **2、cargo run**
 
-curl -X POST -d {devops: 'what are u fucking doing!' } http://localhost:3000/log
+curl -X POST -d '{"devops": "what are u fucking doing!" }' http://localhost:3000/log
 
 Then, you can get a log file in /data/logServer like 2018-07-25-kong.log 
 
