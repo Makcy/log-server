@@ -37,7 +37,7 @@ fn log_body(req: &mut Request) -> IronResult<Response> {
     let body = req.get::<bodyparser::Raw>();
     match body {
         Ok(Some(body)) => {
-            persistence_log(body.as_bytes()).ok();
+            persistence_log((body + "\n").as_bytes()).ok();
         }, 
         Ok(None) => println!("No body"),
         Err(err) => println!("Error: {:?}", err)
